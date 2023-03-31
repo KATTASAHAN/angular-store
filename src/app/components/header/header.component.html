@@ -1,0 +1,41 @@
+<mat-toolbar class="max-w-7xl mx-auto border-x justify-between">
+  <a routerLink="home">Shop</a>
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    *ngIf="currentRoute !== '/cart'"
+  >
+    <mat-icon
+      [matBadge]="itemsQuantity"
+      [matBadgeHidden]="!itemsQuantity"
+      matBadgeColor="warn"
+      >shopping_cart</mat-icon
+    >
+  </button>
+  <mat-menu #menu="matMenu">
+    <div class="p-3 divide-y divide-solid">
+      <div class="pb-3 flex justify-between">
+        <span class="mr-16"> {{ itemsQuantity }} Items</span>
+        <button mat-raised-button (click)="onClearCart()">Clear Cart</button>
+      </div>
+      <div *ngIf="cart.items.length" class="py-3">
+        <div
+          *ngFor="let item of cart.items"
+          class="flex justify-between font-light mb-2"
+        >
+          {{ item.name }} x {{ item.quantity }}
+          <span class="font-bold">{{ item.price | currency }}</span>
+        </div>
+      </div>
+      <div class="py-3 flex justify-between font-light">
+        Total
+        <span class="font-bold">{{ getTotal(cart.items) | currency }}</span>
+      </div>
+    </div>
+    <div class="flex flex-row-reverse mx-2">
+      <button routerLink="/cart" mat-raised-button color="primary">
+        Go To Cart
+      </button>
+    </div>
+  </mat-menu>
+</mat-toolbar>
