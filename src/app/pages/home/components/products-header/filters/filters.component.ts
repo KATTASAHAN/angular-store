@@ -6,7 +6,7 @@ import {
   OnDestroy,
 } from "@angular/core";
 import { Subscription } from "rxjs";
-import { StoreService } from "docs/app/services/store.service";
+import { StoreService } from "src/app/services/store.service";
 
 @Component({
   selector: "app-filters",
